@@ -23,14 +23,23 @@ const Counter = ({ name, state, stateFn }) => {
 }
 
 const Statistics = ({ good, neutral, bad }) => {
-  return <>
-    <h1>statistics</h1>
-    <CountStat name="good" state={good} />
-    <CountStat name="neutral" state={neutral} />
-    <CountStat name="bad" state={bad} />
-    <p>average {(good - bad) / (good + neutral + bad)}</p>
-    <p>positive {(good * 100) / (good + neutral + bad)} %</p>
-  </>
+  const responses = good + neutral + bad;
+  if (responses > 0) {
+    return <>
+      <h1>statistics</h1>
+      <CountStat name="good" state={good} />
+      <CountStat name="neutral" state={neutral} />
+      <CountStat name="bad" state={bad} />
+      <p>average {(good - bad) / (responses)}</p>
+      <p>positive {(good * 100) / (responses)} %</p>
+    </>
+  }
+  else {
+    return <>
+      <h1>statistics</h1>
+      <p>No feedback given</p>
+    </>
+  }
 }
 
 const CountStat = ({ name, state }) => {
