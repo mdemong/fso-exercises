@@ -9,17 +9,17 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <Counter name="good" state={good} stateFn={setGood} />
-      <Counter name="neutral" state={neutral} stateFn={setNeutral} />
-      <Counter name="bad" state={bad} stateFn={setBad} />
+      <Button text="good" state={good} stateFn={setGood} />
+      <Button text="neutral" state={neutral} stateFn={setNeutral} />
+      <Button text="bad" state={bad} stateFn={setBad} />
 
       <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   )
 }
 
-const Counter = ({ name, state, stateFn }) => {
-  return <button onClick={() => stateFn(state + 1)}>{name}</button>
+const Button = ({ text, state, stateFn }) => {
+  return <button onClick={() => stateFn(state + 1)}>{text}</button>
 }
 
 const Statistics = ({ good, neutral, bad }) => {
@@ -27,11 +27,11 @@ const Statistics = ({ good, neutral, bad }) => {
   if (responses > 0) {
     return <>
       <h1>statistics</h1>
-      <CountStat name="good" state={good} />
-      <CountStat name="neutral" state={neutral} />
-      <CountStat name="bad" state={bad} />
-      <p>average {(good - bad) / (responses)}</p>
-      <p>positive {(good * 100) / (responses)} %</p>
+      <StatisticLine text="good" value={good} />
+      <StatisticLine text="neutral" value={neutral} />
+      <StatisticLine text="bad" value={bad} />
+      <StatisticLine text="average" value={(good - bad) / (responses)} />
+      <StatisticLine text="positive" value={(good * 100) / (responses) + " %"} />
     </>
   }
   else {
@@ -42,8 +42,8 @@ const Statistics = ({ good, neutral, bad }) => {
   }
 }
 
-const CountStat = ({ name, state }) => {
-  return <p>{name} {state}</p>
+const StatisticLine = ({ text, value }) => {
+  return <p>{text} {value}</p>
 }
 
 
