@@ -17,6 +17,8 @@ const App = () => {
       <CountStat name="good" state={good} />
       <CountStat name="neutral" state={neutral} />
       <CountStat name="bad" state={bad} />
+      <p>average {(good - bad) / (good + neutral + bad)}</p>
+      <p>positive {(good * 100) / (good + neutral + bad)} %</p>
     </div>
   )
 }
