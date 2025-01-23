@@ -13,12 +13,7 @@ const App = () => {
       <Counter name="neutral" state={neutral} stateFn={setNeutral} />
       <Counter name="bad" state={bad} stateFn={setBad} />
 
-      <h1>statistics</h1>
-      <CountStat name="good" state={good} />
-      <CountStat name="neutral" state={neutral} />
-      <CountStat name="bad" state={bad} />
-      <p>average {(good - bad) / (good + neutral + bad)}</p>
-      <p>positive {(good * 100) / (good + neutral + bad)} %</p>
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   )
 }
@@ -27,8 +22,20 @@ const Counter = ({ name, state, stateFn }) => {
   return <button onClick={() => stateFn(state + 1)}>{name}</button>
 }
 
+const Statistics = ({ good, neutral, bad }) => {
+  return <>
+    <h1>statistics</h1>
+    <CountStat name="good" state={good} />
+    <CountStat name="neutral" state={neutral} />
+    <CountStat name="bad" state={bad} />
+    <p>average {(good - bad) / (good + neutral + bad)}</p>
+    <p>positive {(good * 100) / (good + neutral + bad)} %</p>
+  </>
+}
+
 const CountStat = ({ name, state }) => {
   return <p>{name} {state}</p>
 }
+
 
 export default App 
